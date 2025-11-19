@@ -48,8 +48,7 @@ module BCD_Adder_4bit(
 
   assign Correction_Value = Correction ? 4'b0110 : 4'b0000;
 
- 
-  RCA_4bit RCA2(BCD_Sum, Temp_Cout, Binary_Sum, Correction_Value, 1'b0);
+ RCA_4bit RCA2(BCD_Sum, Temp_Cout, Binary_Sum, Correction_Value, 1'b0);
 
   assign BCD_Cout = Temp_Cout | Correction;
 

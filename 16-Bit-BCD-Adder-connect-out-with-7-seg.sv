@@ -201,10 +201,6 @@ endmodule
 
 
 
-
-
-
-
 module RCA_4bit(output [3:0] Sum, output Cout, input [3:0] A, B, input Cin);
   wire [2:0] c;
   Full_Adder FA0(Sum[0], c[0], A[0], B[0], Cin);
@@ -237,10 +233,10 @@ module BCD_Adder_4bit(output [3:0] BCD_Sum, output BCD_Cout, input [3:0] A, B, i
   not (notCorr, Correction);
 
   // Correction_Value = Correction ? 0110 : 0000
-  and (Correction_Value[0], 1'b0, Correction); // ثابت صفر
-  and (Correction_Value[1], 1'b1, Correction); // 1
-  and (Correction_Value[2], 1'b1, Correction); // 1
-  and (Correction_Value[3], 1'b0, Correction); // 0
+  and (Correction_Value[0], 1'b0, Correction); 
+  and (Correction_Value[1], 1'b1, Correction); 
+  and (Correction_Value[2], 1'b1, Correction); 
+  and (Correction_Value[3], 1'b0, Correction); 
 
   RCA_4bit RCA2(BCD_Sum, Temp_Cout, Binary_Sum, Correction_Value, 1'b0);
   or (BCD_Cout, Temp_Cout, Correction);
@@ -267,10 +263,6 @@ endmodule
 
 
 
-
-
-
-
 module Top_BCD_Adder_7Seg(
   input  [15:0] A, B,
   output [6:0] sega,
@@ -289,7 +281,7 @@ module Top_BCD_Adder_7Seg(
   seven_segment_udp disp3(SUM[15], SUM[14], SUM[13], SUM[12], segd[6], segd[5], segd[4], segd[3], segd[2], segd[1], segd[0]);
 
 endmodule
-
+//لازم اغير قيم طباعه لدسمال
 module tb_Top_BCD_Adder_7Seg;
   reg [15:0] A, B;
   wire [6:0] sega, segb, segc, segd;
@@ -308,11 +300,12 @@ module tb_Top_BCD_Adder_7Seg;
              segd[6], segd[5], segd[4], segd[3], segd[2], segd[1], segd[0]);
 
    
-    A = 16'h0009; B = 16'h0001; #20;  // 9 + 1 = 10
-    A = 16'h0005; B = 16'h0005; #20;  // 5 + 5 = 10
-    A = 16'h0099; B = 16'h0001; #20;  // 99 + 1 = 100
-    A = 16'h0456; B = 16'h0544; #20;  // 456 + 544 = 1000
+    A = 16'h0009; B = 16'h0001; #20;  
+    A = 16'h0005; B = 16'h0005; #20;  
+    A = 16'h0099; B = 16'h0001; #20;  
+    A = 16'h0456; B = 16'h0544; #20;  
 
     $finish;
   end
 endmodule
+
